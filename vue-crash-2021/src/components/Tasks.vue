@@ -1,7 +1,7 @@
 <template>
   <div>
     <section v-for="task in tasks" v-bind:key="task.id">
-        <Task v-bind:task="task"></Task>
+        <Task @toggle-reminder="$emit('toggle-reminder', task.id)" @delete-task="$emit('delete-task', task.id)" v-bind:task="task"></Task>
     </section>
   </div>
 </template>
@@ -16,7 +16,8 @@ export default {
   },
   components: {
       Task
-  }
+  },
+  emits: ['delete-task', 'toggle-reminder']
 }
 </script>
   

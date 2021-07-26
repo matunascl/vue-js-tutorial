@@ -1,6 +1,6 @@
 <template>
-  <div class="task">
-      <h3>{{task.text}}</h3>
+  <div @dblclick="$emit('toggle-reminder', task.id) " v-bind:class="[task.reminder ? 'reminder' : '', 'task']">
+      <h3>{{task.text}}<i @click="$emit('delete-task', task.id)" class="fas fa-times"></i></h3>
       <p>{{task.day}}</p>
   </div>
 
@@ -12,7 +12,7 @@ export default {
   name: 'Task',
   props: {
       task: Object
-  }
+  },
 }
 </script>
 

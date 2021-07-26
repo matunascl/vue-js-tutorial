@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <Header title='Task Tracker'></Header>
-    <Tasks v-bind:tasks="tasks"></Tasks>
+    <Tasks @toggle-reminder="toggleReminder" @delete-task="deleteTask" v-bind:tasks="tasks"></Tasks>
   </div>
   
 </template>
@@ -19,6 +19,17 @@ export default {
   data() {
     return {
       tasks: []
+    }
+  },
+  methods: {
+    deleteTask(id) {
+      if(confirm('Are you sure?')) {
+        this.tasks = this.tasks.filter((task) => task.id !== id)
+      }
+    },
+    toggleReminder(id) {
+      this.tasks = this.tasks.map((task) => 
+      task.id === id ? {...task, reminder: !task.reminder } : task)
     }
   },
   created() {
